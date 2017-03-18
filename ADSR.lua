@@ -26,6 +26,19 @@ function ADSR:new(a, d, s, r)
   return setmetatable(adsr, ADSR)
 end
 
+function ADSR:setADSR(a, d, s, r)
+  print(a, d, s, r)
+  assert(a >= 0)
+  assert(d >= 0)
+  assert(s >= 0 and s <= 1)
+  assert(r >= 0)
+  self.attack = a * Settings.sampleRate
+  self.decay = d * Settings.sampleRate
+  self.sustain = s
+  self.release = r * Settings.sampleRate
+  return self
+end
+
 function ADSR:start()
   self.sample_num = 1
   self.state = ATTACK
